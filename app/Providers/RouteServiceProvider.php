@@ -7,6 +7,8 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
+Use App\Models\Entry;
+Use App\Exceptions\InvalidEntrySlugException;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -48,6 +50,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->middleware('api')
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
+        });
+        Route::bind('entry', function($value){
+            $parts = explode ('-',$value);    //permite obtener el enlace parte por parte
+            $id = end($parts); //rescata el ultimo valor de $parts
+            $entry = Entry::FindOrFail($id);
+
+            if ($entry->slug.'-'.$entry->id === $value)
+            {
+                return  $entry;
+            } else {
+                throw new InvalidEntrySlugException();
+            }
         });
     }
 

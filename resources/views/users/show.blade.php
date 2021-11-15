@@ -20,11 +20,11 @@
                         </div>
                     @endif
                     <p>Entradas publicadas:</p>
-                    <p>Entradas publicadas:</p>
+
                     <ul>
                         @foreach ($entries as $entry)
                         <li>
-                            <a href="{{url('entries/'.$entry->id)}}">
+                            <a href="{{$entry->getUrl()}}">
                             {{$entry->title}}
                             </a>
                         </li>
