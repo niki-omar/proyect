@@ -15,6 +15,9 @@
                         {{session('status')}}
                     </div>
                     @endif
+                    @if($entries->isEmpty())
+                        <p>Aun no se ha publicado ninguna entrada</p>
+                    @else
                     <p>Mis entradas</p>
                     <ul>
                         @foreach ($entries as $entry)
@@ -25,6 +28,7 @@
                         </li>
                         @endforeach
                     </ul>
+                    @endif
                 </div>
             </div>
         </div>

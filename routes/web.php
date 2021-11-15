@@ -16,4 +16,4 @@ Route::post('entries/create',[EntryController::class, 'store']);
 Route::get('/entries/{entryBySlug}',[GuestController::class, 'show']);
 Route::get('/entries/{entry}/edit',[EntryController::class, 'edit']);
 Route::put('/entries/{entry}',[EntryController::class, 'update']);
-Route::get('/users/{user}',[UserController::class, 'show']);
+Route::get('/@{user}',[UserController::class, 'show']);
