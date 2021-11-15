@@ -14,8 +14,10 @@ class GuestController extends Controller
          //datos en una cantidad especificada por el numero dentro del parentesis
         return view ('welcome', compact('entries'));
     }
-    public function show(Entry $entry){
+    public function show(Entry $entryBySlug){
 
-        return view ('entries.show', compact('entry'));
+        return view ('entries.show', [
+            'entry' => $entryBySlug
+        ]);
     }
 }

@@ -13,7 +13,7 @@ Route::get('/home', [HomeController::class, 'index']);
 Route::get('/entries/create',[EntryController::class, 'create']);
 // Route::post('/entries', 'EntryController@store'); Laravel 7
 Route::post('entries/create',[EntryController::class, 'store']);
-Route::get('/entries/{entry}',[GuestController::class, 'show']);
+Route::get('/entries/{entryBySlug}',[GuestController::class, 'show']);
 Route::get('/entries/{entry}/edit',[EntryController::class, 'edit']);
 Route::put('/entries/{entry}',[EntryController::class, 'update']);
 Route::get('/users/{user}',[UserController::class, 'show']);

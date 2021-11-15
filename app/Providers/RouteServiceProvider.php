@@ -51,16 +51,18 @@ class RouteServiceProvider extends ServiceProvider
                 ->namespace($this->namespace)
                 ->group(base_path('routes/api.php'));
         });
-        Route::bind('entry', function($value){
+        Route::bind('entryBySlug', function($value){
             $parts = explode ('-',$value);    //permite obtener el enlace parte por parte
             $id = end($parts); //rescata el ultimo valor de $parts
             $entry = Entry::FindOrFail($id);
-
+            //el metodo FindOrFail buscara el Id al final de la URL
+            //si dicha id se encuentra compilara el siguiente if, de lo contrario
+            //pasara al else mantando a la clase InvalidEntrySlugException
             if ($entry->slug.'-'.$entry->id === $value)
             {
                 return  $entry;
             } else {
-                throw new InvalidEntrySlugException();
+                throw new InvalidEntrySlugException($entry);
             }
         });
     }
